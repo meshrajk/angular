@@ -8,10 +8,9 @@ import {
     EventEmitter,
     Input,
     OnInit,
-    Output, QueryList, TemplateRef,
-    ViewChild
+    Output, QueryList,
+    ViewEncapsulation
 } from '@angular/core';
-import {COURSES} from '../../db-data';
 import {Course} from '../model/course';
 import {CourseImageComponent} from '../course-image/course-image.component';
 
