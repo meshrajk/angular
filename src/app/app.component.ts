@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {COURSES} from '../db-data';
-import {Course} from './model/course';
-import {CourseCardComponent} from './course-card/course-card.component';
-import {HighlightedDirective} from './directives/highlighted.directive';
-import {Observable} from 'rxjs';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Course } from './model/course';
+import { CoursesService } from './services/courses.service';
+import { AppConfig, CONFIG_TOKEN } from './config';
+import { COURSES } from 'src/db-data';
+
 
 @Component({
   selector: 'app-root',
@@ -15,13 +15,20 @@ export class AppComponent implements OnInit {
 
   courses = COURSES;
 
-  constructor() {
-
+  constructor(private courseService: CoursesService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig) {
   }
 
   ngOnInit() {
   }
 
-
-
+  saveCourse(course: Course) {
+    this.courseService.saveCourse(course);
+  }
+  onEditCourse(){
+    const course = this.courses[0];
+    const newCourse = {...course};
+    newCourse.description = 'New Value!';
+    this.courses[0] = newCourse;
+  }
 }
