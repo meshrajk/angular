@@ -8,8 +8,12 @@
 </div>
 <div>
 
-  <div class="courses">
-    <course-card *ngFor="let course of courses" [course]="course" (courseChanged)="saveCourse($event)">
+  <div class="courses" *ngIf="courses[0] as course">
+    <course-card
+    (courseChanged)="saveCourse($event)"
+    type="beginner"
+    [course]="course" 
+    >
       <course-image [src]="course.iconUrl"></course-image>
     </course-card>
   </div>
